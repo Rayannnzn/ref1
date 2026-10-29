@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="120" height="27" viewBox="0 0 120 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="slider">
+<g id="Active">
+<path id="Ellipse 2" opacity="0.7" d="M26.5 13.5C26.5 20.6797 20.6797 26.5 13.5 26.5C6.3203 26.5 0.5 20.6797 0.5 13.5C0.5 6.3203 6.3203 0.5 13.5 0.5C20.6797 0.5 26.5 6.3203 26.5 13.5Z" stroke="black"/>
+<path id="Ellipse 1" d="M18.5 13.5C18.5 16.2614 16.2614 18.5 13.5 18.5C10.7386 18.5 8.5 16.2614 8.5 13.5C8.5 10.7386 10.7386 8.5 13.5 8.5C16.2614 8.5 18.5 10.7386 18.5 13.5Z" fill="black" stroke="black"/>
+</g>
+<circle id="Ellipse 1_2" cx="52.5" cy="13.5" r="5.5" fill="#B6B6B6"/>
+<circle id="Ellipse 2_2" cx="83.5" cy="13.5" r="5.5" fill="#B6B6B6"/>
+<circle id="Ellipse 3" cx="114.5" cy="13.5" r="5.5" fill="#B6B6B6"/>
+</g>
+</svg>

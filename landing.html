@@ -1,0 +1,2286 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modest Kouture</title>
+    <meta
+      name="description"
+      content="Landing page reference: the FASCO Figma layout in the Modest Kouture pink theme."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Volkhov&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --brand-primary: #d4517a;
+        --brand-primary-light: #f2a8be;
+        --brand-primary-bg: #f9e4ec;
+        --brand-surface: #ffffff;
+        --brand-background: #fdf6f9;
+        --brand-text-primary: #2d2d2d;
+        --brand-text-secondary: #6b6b6b;
+        --brand-text-muted: #a89aa3;
+        --brand-border: #e8e0e4;
+        --urgent: #ff4646;
+        --shadow-button: 0 20px 35px rgba(212, 81, 122, 0.25);
+        --shadow-card: 0 40px 90px rgba(0, 0, 0, 0.06);
+        --shadow-band: 0 20px 52px rgba(68, 68, 68, 0.04);
+        --font-body: "Poppins", system-ui, sans-serif;
+        --font-display: "Volkhov", Georgia, serif;
+        --gutter: 16px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-body);
+        font-size: 16px;
+        line-height: 1.5;
+        color: var(--brand-text-primary);
+        background: var(--brand-surface);
+        overflow-x: hidden;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-weight: 400;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(30px, 6vw, 46px);
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      /* The store's heading style (Poppins Bold, tight tracking), used on the
+         Deals and New Arrivals titles. */
+      .section-title-bold {
+        font-family: var(--font-body);
+        font-size: clamp(28px, 5vw, 40px);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+      }
+
+      .lead {
+        max-width: 614px;
+        margin: 20px auto 0;
+        color: var(--brand-text-secondary);
+        line-height: 26px;
+        text-align: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        padding: 0 32px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--brand-primary);
+        color: #fff;
+        box-shadow: var(--shadow-button);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: filter 0.15s;
+      }
+
+      .btn:hover {
+        filter: brightness(0.94);
+      }
+
+      .btn-wide {
+        min-width: 207px;
+      }
+
+      /* Rows that swipe on phones and lay out on wider screens. */
+      .row {
+        display: flex;
+        gap: 16px;
+        margin: 0 calc(-1 * var(--gutter));
+        padding: 0 var(--gutter);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+
+      .row::-webkit-scrollbar {
+        display: none;
+      }
+
+      .row > * {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+      }
+
+      .arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+      }
+
+      .arrow img {
+        width: 78px;
+        max-width: none;
+      }
+
+      .arrow-prev img {
+        transform: rotate(180deg);
+      }
+
+      .arrows {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      /* 1. Header: the store's own header (components/layout/Header.tsx).
+         Phones: menu, logo, search pill, cart. Wider screens add the actions
+         and the category bar. */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--brand-border);
+        transition: box-shadow 0.3s;
+      }
+
+      .site-header.is-scrolled {
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      }
+
+      .site-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 64px;
+        min-width: 0;
+      }
+
+      .site-bar svg {
+        width: 20px;
+        height: 20px;
+        flex: none;
+      }
+
+      .icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        border-radius: 10px;
+        background: none;
+        color: var(--brand-text-primary);
+        cursor: pointer;
+        transition: background-color 0.15s;
+      }
+
+      .icon-btn:hover {
+        background: var(--brand-primary-bg);
+      }
+
+      .menu-btn {
+        margin-left: -8px;
+      }
+
+      .site-logo {
+        flex: none;
+        min-width: 0;
+      }
+
+      .site-logo img {
+        height: 40px;
+        width: auto;
+        max-width: 140px;
+        object-fit: contain;
+      }
+
+      .site-search {
+        position: relative;
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      .site-search input {
+        width: 100%;
+        height: 40px;
+        padding: 0 40px 0 16px;
+        border: 1px solid var(--brand-border);
+        border-radius: 999px;
+        background: var(--brand-background);
+        color: var(--brand-text-primary);
+        font-size: 14px;
+      }
+
+      .site-search input::placeholder {
+        color: var(--brand-text-secondary);
+      }
+
+      .site-search input:focus {
+        outline: none;
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 2px rgba(212, 81, 122, 0.5);
+        background: var(--brand-surface);
+      }
+
+      .site-search .search-icon {
+        position: absolute;
+        top: 50%;
+        right: 14px;
+        transform: translateY(-50%);
+        display: flex;
+        color: var(--brand-text-secondary);
+        pointer-events: none;
+      }
+
+      .site-search .search-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .site-actions {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-left: auto;
+        flex: none;
+      }
+
+      .sell,
+      .likes,
+      .btn-ghost,
+      .site-actions .btn {
+        display: none;
+      }
+
+      .btn-outline {
+        align-items: center;
+        gap: 8px;
+        height: 52px;
+        padding: 0 24px;
+        border: 1px solid var(--brand-primary);
+        border-radius: 10px;
+        color: var(--brand-primary);
+        font-weight: 500;
+        white-space: nowrap;
+        transition: background-color 0.15s;
+      }
+
+      .btn-outline:hover {
+        background: var(--brand-primary-bg);
+      }
+
+      .btn-ghost {
+        align-items: center;
+        height: 44px;
+        padding: 0 20px;
+        border-radius: 10px;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: background-color 0.15s;
+      }
+
+      .btn-ghost:hover {
+        background: var(--brand-primary-bg);
+      }
+
+      .site-actions .btn {
+        min-height: 44px;
+        padding: 0 20px;
+        box-shadow: none;
+        font-weight: 500;
+      }
+
+      .site-cats {
+        display: none;
+      }
+
+      .phone-menu {
+        margin: 0 var(--gutter) 12px;
+        padding: 8px 0;
+        background: var(--brand-surface);
+        border: 1px solid var(--brand-border);
+        border-radius: 10px;
+        box-shadow: var(--shadow-band);
+      }
+
+      .phone-menu[hidden] {
+        display: none;
+      }
+
+      .phone-menu a {
+        display: block;
+        padding: 12px 20px;
+      }
+
+      /* 2. Hero */
+      .hero {
+        position: relative;
+        display: grid;
+        gap: 24px;
+        padding-top: 32px;
+      }
+
+      .hero-panel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        background: var(--brand-primary-light);
+        aspect-ratio: 392 / 553;
+      }
+
+      .hero-panel img {
+        position: absolute;
+        inset: auto 0 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center bottom;
+      }
+
+      .hero-sides {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .hero-center {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .hero-banner {
+        height: 150px;
+        overflow: hidden;
+        border-radius: 10px;
+        background: var(--brand-primary-light);
+      }
+
+      .hero-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-banner-top img {
+        object-position: center 30%;
+      }
+
+      .hero-banner-bottom img {
+        object-position: center 35%;
+      }
+
+      .hero-copy {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 24px 0;
+        text-align: center;
+      }
+
+      .hero-ultimate {
+        font-size: clamp(54px, 12vw, 91px);
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-sale {
+        font-size: clamp(110px, 26vw, 187px);
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: -0.055em;
+        color: transparent;
+        -webkit-text-stroke: 1px var(--brand-primary);
+      }
+
+      .hero-kicker {
+        margin-top: 8px;
+        font-size: 20px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .hero-copy .btn {
+        margin-top: 16px;
+        font-weight: 500;
+      }
+
+      .hero-float {
+        display: none;
+      }
+
+      /* 3. Logos */
+      .logos {
+        margin-top: 40px;
+        padding: 40px 0;
+        background: var(--brand-surface);
+        box-shadow: var(--shadow-band);
+      }
+
+      .logos .row {
+        align-items: center;
+        gap: 48px;
+      }
+
+      /* Each logo box and crop matches the design's slot, because the source files carry padding. */
+      .logo {
+        position: relative;
+        flex: 0 0 auto;
+        width: 196px;
+        overflow: hidden;
+      }
+
+      .logo img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        object-fit: cover;
+      }
+
+      .logo-1 {
+        height: 33px;
+      }
+
+      .logo-2 {
+        height: 25px;
+      }
+
+      .logo-3 {
+        height: 32px;
+      }
+
+      .logo-4 {
+        height: 33px;
+      }
+
+      .logo-4 img {
+        top: -119.28%;
+        height: 338.56%;
+      }
+
+      .logo-5 {
+        width: 184px;
+        height: 27px;
+      }
+
+      .logo-5 img {
+        top: -290.91%;
+        left: -16.23%;
+        width: 132.45%;
+        height: 681.82%;
+      }
+
+      /* 4. Deals */
+      .deals {
+        overflow: hidden;
+        padding: 56px 0;
+        background: linear-gradient(
+          180deg,
+          var(--brand-surface),
+          var(--brand-background)
+        );
+      }
+
+      .deals-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+      }
+
+      .deals-copy .section-title,
+      .deals-copy .lead {
+        margin-left: 0;
+        text-align: left;
+      }
+
+      .deals-copy .btn {
+        margin-top: 40px;
+      }
+
+      .deals-hurry {
+        margin-top: 48px;
+        font-size: clamp(22px, 5vw, 28px);
+        font-weight: 500;
+      }
+
+      .timer {
+        display: flex;
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .timer-unit {
+        text-align: center;
+      }
+
+      .timer-box {
+        display: grid;
+        place-items: center;
+        width: 76px;
+        height: 76px;
+        border-radius: 10px;
+        background: var(--brand-surface);
+        box-shadow: 0 4px 14px 1px rgba(0, 0, 0, 0.16);
+        font-size: 32px;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .timer-label {
+        margin-top: 15px;
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .deals-track {
+        gap: 24px;
+      }
+
+      .deal-photo {
+        position: relative;
+        width: 280px;
+        height: 400px;
+        overflow: hidden;
+      }
+
+      .deal-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .deal-photo-1 img {
+        transform: scaleX(-1);
+        object-position: 60% center;
+      }
+
+      .deal-photo-2 img {
+        object-position: 55% center;
+      }
+
+      .deal-photo-3 img {
+        object-position: 35% center;
+      }
+
+      .deal-badge {
+        position: absolute;
+        left: 24px;
+        bottom: 24px;
+        width: 217px;
+        height: 130px;
+        padding: 32px 26px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(3.5px);
+      }
+
+      .deal-badge-line {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+
+      .deal-badge-off {
+        margin-top: 8px;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .deals-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 32px;
+      }
+
+      .deals-controls .arrows {
+        justify-content: flex-start;
+      }
+
+      /* 5. New arrivals */
+      .arrivals {
+        padding-top: 72px;
+        padding-bottom: 72px;
+      }
+
+      .categories {
+        justify-content: flex-start;
+        margin-top: 50px;
+      }
+
+      .category {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 207px;
+        min-height: 56px;
+        padding: 0 24px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--brand-background);
+        color: var(--brand-text-secondary);
+        cursor: pointer;
+      }
+
+      .category[aria-pressed="true"] {
+        background: var(--brand-primary);
+        color: #fff;
+        box-shadow: var(--shadow-button);
+      }
+
+      .products {
+        margin-top: 50px;
+        gap: 24px;
+      }
+
+      .product {
+        width: 300px;
+        padding: 15px 25px 30px;
+        border-radius: 10px;
+        background: var(--brand-surface);
+        box-shadow: var(--shadow-card);
+      }
+
+      .product-image {
+        aspect-ratio: 336 / 244;
+        overflow: hidden;
+        border-radius: 10px;
+        background: var(--brand-primary-bg);
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .product-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .product-name {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      .product-brand {
+        margin-top: 2px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--brand-text-secondary);
+      }
+
+      .product-head img {
+        flex: 0 0 auto;
+        margin-top: 6px;
+      }
+
+      .product-reviews {
+        margin-top: 24px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .product-foot {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .product-price {
+        font-size: 24px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .product-stock {
+        font-size: 12px;
+        color: var(--urgent);
+      }
+
+      .arrivals-more {
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      /* 6. Feature slider */
+      .feature {
+        overflow: hidden;
+      }
+
+      .feature-grid {
+        display: grid;
+      }
+
+      .feature-photo {
+        position: relative;
+        aspect-ratio: 722 / 570;
+        overflow: hidden;
+      }
+
+      .feature-photo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+      }
+
+      .hotspot {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        width: 125px;
+        height: 39px;
+        border: 1px solid var(--brand-primary);
+        background: rgba(255, 255, 255, 0.41);
+        backdrop-filter: blur(6px);
+        line-height: 26px;
+      }
+
+      .hotspot-line {
+        position: absolute;
+        display: none;
+      }
+
+      .hotspot-line.flip {
+        transform: scaleX(-1);
+      }
+
+      .feature-copy {
+        position: relative;
+        isolation: isolate;
+        margin: 0 calc(-1 * var(--gutter));
+        padding: 48px var(--gutter);
+        background: var(--brand-primary-bg);
+      }
+
+      .feature-eyebrow,
+      .feature-text,
+      .feature-size-label {
+        color: var(--brand-text-secondary);
+      }
+
+      .feature-copy .section-title {
+        margin-top: 20px;
+        text-align: left;
+      }
+
+      .feature-desc {
+        margin-top: 20px;
+        text-decoration: underline;
+      }
+
+      .feature-text {
+        max-width: 515px;
+        margin-top: 20px;
+      }
+
+      .feature-size {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .feature-size span:last-child {
+        display: grid;
+        place-items: center;
+        width: 53px;
+        height: 28px;
+        border-radius: 10px;
+        background: var(--brand-primary);
+        color: #fff;
+        line-height: 1;
+      }
+
+      .feature-price {
+        margin-top: 20px;
+        font-size: 28px;
+        font-weight: 500;
+      }
+
+      .feature-price small {
+        font-size: 24px;
+      }
+
+      .feature-copy .btn {
+        margin-top: 20px;
+      }
+
+      /* 7. Features */
+      .perks {
+        padding: 48px 0;
+        background: var(--brand-surface);
+        box-shadow: var(--shadow-band);
+      }
+
+      .perks-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 16px;
+      }
+
+      .perk {
+        display: flex;
+        align-items: flex-start;
+        gap: 13px;
+      }
+
+      .perk img {
+        flex: 0 0 auto;
+        margin-top: 3px;
+      }
+
+      .perk-title {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+
+      .perk-text {
+        line-height: 26px;
+      }
+
+      /* 8. Instagram */
+      .instagram {
+        padding: 72px 0 0;
+      }
+
+      .insta-row {
+        align-items: center;
+        gap: 0;
+        margin-top: 48px;
+      }
+
+      .insta-row img {
+        width: 180px;
+        min-width: 0;
+        height: 240px;
+        object-fit: cover;
+      }
+
+      .insta-row img:nth-child(even) {
+        height: 270px;
+      }
+
+      /* 9. Testimonials */
+      .testimonials {
+        overflow: hidden;
+        padding: 72px 0 60px;
+        background: var(--brand-background);
+      }
+
+      .testi-row {
+        margin-top: 48px;
+        gap: 24px;
+      }
+
+      .testi {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        width: 320px;
+        padding: 32px;
+        border-radius: 10px;
+        background: var(--brand-surface);
+        box-shadow: 0 20px 60px rgba(46, 33, 61, 0.08);
+      }
+
+      .testi-photo {
+        position: relative;
+        flex: 0 0 auto;
+        width: 182px;
+        height: 182px;
+        margin: 0 0 15px 16px;
+      }
+
+      .testi-photo::before {
+        content: "";
+        position: absolute;
+        inset: 15px auto auto -16px;
+        width: 100%;
+        height: 100%;
+        background: var(--brand-primary-bg);
+      }
+
+      .testi-photo img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .testi-body {
+        flex: 1;
+        font-size: 12px;
+      }
+
+      .testi-body img {
+        width: 71px;
+        margin-top: 20px;
+      }
+
+      .testi-sep {
+        width: 172px;
+        height: 1px;
+        margin: 22px 0 12px;
+        background: var(--brand-text-primary);
+      }
+
+      .testi-name {
+        font-family: var(--font-display);
+        font-size: 24px;
+        line-height: 1.3;
+      }
+
+      .testi-role {
+        margin-top: 8px;
+      }
+
+      .testimonials .arrows {
+        margin-top: 48px;
+      }
+
+      /* 10. Subscribe */
+      .subscribe {
+        padding: 72px 0;
+      }
+
+      .subscribe-grid {
+        display: grid;
+        gap: 40px;
+      }
+
+      /* The two photos use the design's crops; the left one is mirrored like the design. */
+      .subscribe-photo {
+        position: relative;
+        height: 360px;
+        overflow: hidden;
+      }
+
+      .subscribe-photo img {
+        position: absolute;
+        max-width: none;
+      }
+
+      .subscribe-photo-left {
+        transform: scaleX(-1);
+      }
+
+      .subscribe-photo-left img {
+        top: -6.21%;
+        left: -107.04%;
+        width: 223.46%;
+        height: 106.21%;
+      }
+
+      .subscribe-photo-right img {
+        top: -6.51%;
+        left: -133.49%;
+        width: 239.23%;
+        height: 107.64%;
+      }
+
+      .subscribe-sides {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .subscribe-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .subscribe-form {
+        width: 100%;
+        max-width: 631px;
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .subscribe-form input {
+        width: 100%;
+        height: 72px;
+        padding: 0 30px;
+        border: 1px solid var(--brand-border);
+        background: var(--brand-surface);
+        box-shadow: 0 32px 40px rgba(0, 0, 0, 0.04);
+        font-size: 18px;
+        color: var(--brand-text-primary);
+      }
+
+      .subscribe-form input::placeholder {
+        color: var(--brand-text-muted);
+      }
+
+      .subscribe-form .btn {
+        margin-top: 30px;
+      }
+
+      /* 11. Footer */
+      .footer {
+        padding: 30px 0 24px;
+        border-top: 1px solid var(--brand-border);
+      }
+
+      .footer-top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .footer-top img {
+        height: 32px;
+        width: auto;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px 24px;
+      }
+
+      .footer-links a {
+        display: inline-block;
+        padding: 10px 0;
+      }
+
+      .footer-copy {
+        margin-top: 24px;
+        font-size: 12px;
+        line-height: 26px;
+        text-align: center;
+      }
+
+      @media (min-width: 640px) {
+        .btn-ghost,
+        .site-actions .btn {
+          display: inline-flex;
+        }
+
+        .btn-ghost {
+          margin-left: 4px;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .site-bar {
+          gap: 20px;
+          height: 96px;
+        }
+
+        .site-bar .menu-btn {
+          display: none;
+        }
+
+        .site-logo img {
+          height: 64px;
+          max-width: none;
+        }
+
+        .site-search {
+          display: flex;
+          justify-content: center;
+          padding: 0 24px;
+        }
+
+        .site-search input {
+          max-width: 576px;
+          height: 48px;
+          padding: 0 52px 0 20px;
+          border-radius: 12px;
+          font-size: 16px;
+        }
+
+        .site-search .search-icon {
+          right: 16px;
+        }
+
+        .site-search .search-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .icon-btn {
+          width: 52px;
+          height: 52px;
+        }
+
+        .likes {
+          display: inline-flex;
+        }
+
+        .site-cats {
+          display: block;
+          border-top: 1px solid rgba(232, 224, 228, 0.6);
+          background: var(--brand-surface);
+        }
+
+        .site-cats .container {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .site-cats a {
+          display: inline-flex;
+          align-items: center;
+          padding: 16px 28px;
+          font-size: 14px;
+          font-weight: 500;
+          color: rgba(45, 45, 45, 0.7);
+          transition: color 0.15s;
+        }
+
+        .site-cats a:hover {
+          color: var(--brand-text-primary);
+        }
+
+        .site-cats .is-hot {
+          color: var(--brand-primary);
+          font-weight: 600;
+        }
+
+        .phone-menu {
+          display: none;
+        }
+
+        .product {
+          width: 386px;
+        }
+
+        .deal-photo {
+          width: 372px;
+          height: 486px;
+        }
+
+        .deal-photo-1 {
+          width: 404px;
+          height: 582px;
+        }
+
+        .subscribe-photo {
+          height: 480px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        :root {
+          --gutter: 32px;
+        }
+
+        .row {
+          margin: 0;
+          padding: 0;
+          overflow: visible;
+        }
+
+        .site-logo img {
+          height: 80px;
+        }
+
+        .sell {
+          display: inline-flex;
+        }
+
+        .hero {
+          grid-template-columns: 392px 1fr 392px;
+          gap: 35px;
+          height: 756px;
+          padding-top: 94px;
+        }
+
+        .hero-sides {
+          display: contents;
+        }
+
+        .hero-panel {
+          height: 100%;
+          aspect-ratio: auto;
+        }
+
+        .hero-panel img {
+          height: 553px;
+        }
+
+        .hero-center {
+          gap: 0;
+        }
+
+        .hero-copy {
+          padding: 0;
+        }
+
+        .logos {
+          margin-top: 27px;
+          padding: 82px 0;
+        }
+
+        .logos .row {
+          justify-content: space-between;
+        }
+
+        .deals {
+          padding: 55px 0;
+        }
+
+        .deals-grid {
+          grid-template-columns: 444px minmax(0, 1fr);
+          gap: 122px;
+        }
+
+        .timer {
+          gap: 30px;
+        }
+
+        .deals-track {
+          align-items: flex-start;
+          margin-right: calc(50% - 50vw);
+          overflow-x: auto;
+        }
+
+        .deals-controls {
+          justify-content: flex-start;
+          gap: 80px;
+        }
+
+        .arrivals {
+          padding-top: 150px;
+          padding-bottom: 0;
+        }
+
+        .categories {
+          justify-content: center;
+          gap: 30px;
+        }
+
+        .products {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 60px 61px;
+        }
+
+        .product {
+          width: auto;
+        }
+
+        .feature {
+          margin-top: 150px;
+        }
+
+        .feature-grid {
+          grid-template-columns: minmax(0, 577px) minmax(0, 1fr);
+          gap: clamp(80px, 10vw, 187px);
+          height: 570px;
+        }
+
+        .feature-photo {
+          width: calc(100% + 145px);
+          height: 570px;
+          margin-left: -145px;
+          aspect-ratio: auto;
+        }
+
+        .hotspot-line {
+          display: block;
+        }
+
+        .feature-copy {
+          margin: 0;
+          padding: 60px 0 0;
+          background: none;
+        }
+
+        /* The slanted panel: its left edge is the 2 px line, top to the right, like the design. */
+        .feature-copy::before {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          bottom: 0;
+          left: -122px;
+          right: -100vw;
+          border-left: 2px solid var(--brand-primary);
+          background: var(--brand-primary-bg);
+          transform: skewX(-18deg);
+        }
+
+        .perks {
+          padding: 72px 0;
+        }
+
+        .perks-grid {
+          grid-template-columns: repeat(4, auto);
+          justify-content: space-between;
+        }
+
+        .instagram {
+          padding-top: 150px;
+        }
+
+        .insta-row {
+          margin: 100px calc(50% - 50vw) 0;
+        }
+
+        .insta-row img {
+          flex: 1 1 0;
+          width: auto;
+          height: 308px;
+        }
+
+        .insta-row img:nth-child(even) {
+          height: 380px;
+        }
+
+        .insta-row img:first-child,
+        .insta-row img:last-child {
+          flex-grow: 1.25;
+        }
+
+        .testimonials {
+          padding: 100px 0 56px;
+        }
+
+        .testi-row {
+          align-items: center;
+          justify-content: center;
+          margin: 124px calc(50% - 50vw) 0;
+        }
+
+        .testi {
+          flex-direction: row;
+          align-items: center;
+          gap: 48px;
+          width: 646px;
+          height: 300px;
+          padding: 36px 48px 36px 36px;
+        }
+
+        .testi-lead {
+          z-index: 1;
+          width: 864px;
+          height: 400px;
+          gap: 84px;
+          padding: 48px;
+        }
+
+        .testi-lead .testi-photo {
+          width: 242px;
+          height: 242px;
+          margin-bottom: 20px;
+          margin-left: 21px;
+        }
+
+        .testi-lead .testi-photo::before {
+          inset: 20px auto auto -21px;
+        }
+
+        .testi-lead .testi-body {
+          font-size: 16px;
+        }
+
+        .testi-lead .testi-body img {
+          width: 95px;
+          margin-top: 27px;
+        }
+
+        .testi-lead .testi-sep {
+          width: 230px;
+          margin: 30px 0 16px;
+        }
+
+        .testi-lead .testi-name {
+          font-size: 32px;
+        }
+
+        .testi-side-left {
+          margin-right: -358px;
+        }
+
+        .testi-side-right {
+          margin-left: -358px;
+        }
+
+        .subscribe {
+          padding: 150px 0 50px;
+        }
+
+        .subscribe-grid {
+          /* The photos reach 60 px past the content column on each side, so their tracks are 60 px narrower. */
+          grid-template-columns: 295px minmax(0, 1fr) 277px;
+          gap: 0;
+          height: 747px;
+        }
+
+        .subscribe-photo-left {
+          margin-left: -60px;
+        }
+
+        .subscribe-photo-right {
+          order: 1;
+          margin-right: -60px;
+        }
+
+        .subscribe-sides {
+          display: contents;
+        }
+
+        .subscribe-photo {
+          height: 100%;
+        }
+
+        .subscribe-photo-left {
+          order: -1;
+        }
+
+        .subscribe-form input {
+          height: 86px;
+          font-size: 22px;
+        }
+
+        .footer-top {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .footer-links {
+          gap: 38px;
+        }
+
+        .footer-links a {
+          padding: 0;
+        }
+
+        .footer-copy {
+          margin-top: 28px;
+        }
+      }
+
+      /* The floating cart and scroll buttons sit outside the content column, as in the design. */
+      @media (min-width: 1600px) {
+        .hero-float {
+          position: absolute;
+          right: calc(50% - 50vw + 40px);
+          bottom: 0;
+          display: flex;
+          align-items: center;
+          gap: 35px;
+        }
+
+        .hero-float .btn {
+          width: 56px;
+          min-width: 0;
+          height: 56px;
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" id="site-header">
+      <div class="container site-bar">
+        <button
+          class="icon-btn menu-btn"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="phone-menu"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 5h16" />
+            <path d="M4 12h16" />
+            <path d="M4 19h16" />
+          </svg>
+        </button>
+        <a class="site-logo" href="#"
+          ><img src="assets/logo.png" alt="Modest Kouture"
+        /></a>
+        <form class="site-search" role="search" aria-label="Search products">
+          <input
+            type="search"
+            placeholder="Search for dresses, abayas, hijabs..."
+            aria-label="Search for dresses, abayas, hijabs..."
+          />
+          <span class="search-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m21 21-4.34-4.34" />
+              <circle cx="11" cy="11" r="8" />
+            </svg>
+          </span>
+        </form>
+        <div class="site-actions">
+          <a class="btn-outline sell" href="#">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" />
+              <path
+                d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"
+              />
+              <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" />
+            </svg>
+            Sell on MK
+          </a>
+          <a class="icon-btn likes" href="#" aria-label="Likes">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"
+              />
+            </svg>
+          </a>
+          <a class="icon-btn" href="#" aria-label="Open cart">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M16 10a4 4 0 0 1-8 0" />
+              <path d="M3.103 6.034h17.794" />
+              <path
+                d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"
+              />
+            </svg>
+          </a>
+          <a class="btn-ghost" href="#">Sign In</a>
+          <a class="btn" href="#">Register</a>
+        </div>
+      </div>
+      <nav class="site-cats" aria-label="Product categories">
+        <div class="container">
+          <a href="#">Women</a>
+          <a href="#">Men</a>
+          <a href="#">Children</a>
+          <a href="#">Electronics</a>
+          <a href="#">Pets</a>
+          <a href="#">Luxury</a>
+          <a href="#">Beauty</a>
+          <a href="#">Jewelry</a>
+          <a href="#">Plus Size</a>
+          <a href="#">Brand</a>
+          <a class="is-hot" href="#">Trending</a>
+        </div>
+      </nav>
+      <nav class="phone-menu" id="phone-menu" aria-label="Main" hidden>
+        <a href="#">Home</a>
+        <a href="#arrivals">Shop</a>
+        <a href="#arrivals">New Arrivals</a>
+        <a href="#">Sellers</a>
+        <a href="#">Likes</a>
+        <a href="#">Sign In</a>
+        <a href="#">Register</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        <section class="hero" aria-label="Ultimate sale">
+          <div class="hero-sides">
+            <div class="hero-panel">
+              <img src="assets/hero-left-bw.png" alt="" />
+              <img src="assets/hero-left-color.webp" alt="" />
+            </div>
+            <div class="hero-panel">
+              <img src="assets/hero-right-bw.png" alt="" />
+              <img src="assets/hero-right-color.webp" alt="" />
+            </div>
+          </div>
+          <div class="hero-center">
+            <div class="hero-banner hero-banner-top">
+              <img src="assets/hero-top.webp" alt="" />
+            </div>
+            <div class="hero-copy">
+              <h1 class="hero-ultimate">ULTIMATE</h1>
+              <p class="hero-sale" aria-hidden="true">SALE</p>
+              <p class="hero-kicker">New collection</p>
+              <a class="btn btn-wide" href="#arrivals">SHOP NOW</a>
+            </div>
+            <div class="hero-banner hero-banner-bottom">
+              <img src="assets/hero-bottom.webp" alt="" />
+            </div>
+          </div>
+          <div class="hero-float">
+            <a class="btn" href="#" aria-label="Cart"
+              ><img src="assets/bag.svg" alt=""
+            /></a>
+            <a href="#logos" aria-label="Scroll down"
+              ><img src="assets/scroll.svg" alt=""
+            /></a>
+          </div>
+        </section>
+      </div>
+
+      <section class="logos" id="logos" aria-label="Brands we carry">
+        <div class="container">
+          <div class="row">
+            <div class="logo logo-1">
+              <img src="assets/logo-1.png" alt="Chanel" />
+            </div>
+            <div class="logo logo-2">
+              <img src="assets/logo-2.png" alt="Louis Vuitton" />
+            </div>
+            <div class="logo logo-3">
+              <img src="assets/logo-3.png" alt="Prada" />
+            </div>
+            <div class="logo logo-4">
+              <img src="assets/logo-4.png" alt="Calvin Klein" />
+            </div>
+            <div class="logo logo-5">
+              <img src="assets/logo-5.png" alt="Denim" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="deals" id="deals">
+        <div class="container deals-grid">
+          <div class="deals-copy">
+            <h2 class="section-title section-title-bold">Deals Of The Month</h2>
+            <p class="lead">
+              Every month we hand-pick a few favorites from our sellers and take
+              30% off until the clock runs out.
+            </p>
+            <a class="btn btn-wide" href="#arrivals">Buy Now</a>
+            <p class="deals-hurry">Hurry, Before It’s Too Late!</p>
+            <div class="timer" id="timer">
+              <div class="timer-unit">
+                <div class="timer-box" data-unit="days">02</div>
+                <div class="timer-label">Days</div>
+              </div>
+              <div class="timer-unit">
+                <div class="timer-box" data-unit="hours">06</div>
+                <div class="timer-label">Hr</div>
+              </div>
+              <div class="timer-unit">
+                <div class="timer-box" data-unit="minutes">05</div>
+                <div class="timer-label">Mins</div>
+              </div>
+              <div class="timer-unit">
+                <div class="timer-box" data-unit="seconds">30</div>
+                <div class="timer-label">Sec</div>
+              </div>
+            </div>
+          </div>
+          <div class="deals-photos">
+            <div class="row deals-track" id="deals-track">
+              <div class="deal-photo deal-photo-1">
+                <img src="assets/deal-1.webp" alt="" />
+                <div class="deal-badge">
+                  <div class="deal-badge-line">
+                    <span>01</span>
+                    <img src="assets/deal-dash.svg" alt="" />
+                    <span>Spring Sale</span>
+                  </div>
+                  <div class="deal-badge-off">30% OFF</div>
+                </div>
+              </div>
+              <div class="deal-photo deal-photo-2">
+                <img src="assets/deal-2.webp" alt="" />
+              </div>
+              <div class="deal-photo deal-photo-3">
+                <img src="assets/deal-3.webp" alt="" />
+              </div>
+            </div>
+            <div class="deals-controls">
+              <div class="arrows">
+                <button
+                  class="arrow arrow-prev"
+                  type="button"
+                  data-scroll="#deals-track"
+                  data-dir="-1"
+                  aria-label="Previous deal"
+                >
+                  <img src="assets/arrow.svg" alt="" />
+                </button>
+                <button
+                  class="arrow"
+                  type="button"
+                  data-scroll="#deals-track"
+                  data-dir="1"
+                  aria-label="Next deal"
+                >
+                  <img src="assets/arrow.svg" alt="" />
+                </button>
+              </div>
+              <img src="assets/deal-pager.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="arrivals container" id="arrivals">
+        <h2 class="section-title section-title-bold">New Arrivals</h2>
+        <p class="lead">
+          Fresh listings from independent modest-fashion sellers across the
+          United States, added every week.
+        </p>
+        <div class="row categories" role="group" aria-label="Categories">
+          <button class="category" type="button" aria-pressed="false">
+            Abayas
+          </button>
+          <button class="category" type="button" aria-pressed="true">
+            Dresses
+          </button>
+          <button class="category" type="button" aria-pressed="false">
+            Hijabs
+          </button>
+          <button class="category" type="button" aria-pressed="false">
+            Modest Sets
+          </button>
+          <button class="category" type="button" aria-pressed="false">
+            Discount Deals
+          </button>
+        </div>
+        <div class="row products">
+          <article class="product">
+            <div class="product-image">
+              <img
+                src="assets/product-1.webp"
+                alt="Satin Maxi Dress"
+                style="object-position: 40% 20%"
+              />
+            </div>
+            <div class="product-head">
+              <div>
+                <h3 class="product-name">Satin Maxi Dress</h3>
+                <p class="product-brand">Modest Kouture</p>
+              </div>
+              <img src="assets/stars.svg" alt="Five stars" />
+            </div>
+            <p class="product-reviews">(4.1k) Customer Reviews</p>
+            <div class="product-foot">
+              <span class="product-price">$95.50</span
+              ><span class="product-stock">Almost Sold Out</span>
+            </div>
+          </article>
+          <article class="product">
+            <div class="product-image">
+              <img
+                src="assets/product-3.webp"
+                alt="Pleated Abaya"
+                style="object-position: 30% 10%"
+              />
+            </div>
+            <div class="product-head">
+              <div>
+                <h3 class="product-name">Pleated Abaya</h3>
+                <p class="product-brand">Modest Kouture</p>
+              </div>
+              <img src="assets/stars.svg" alt="Five stars" />
+            </div>
+            <p class="product-reviews">(4.1k) Customer Reviews</p>
+            <div class="product-foot">
+              <span class="product-price">$95.50</span
+              ><span class="product-stock">Almost Sold Out</span>
+            </div>
+          </article>
+          <article class="product">
+            <div class="product-image">
+              <img
+                src="assets/product-5.webp"
+                alt="Chiffon Hijab Set"
+                style="object-position: center 10%"
+              />
+            </div>
+            <div class="product-head">
+              <div>
+                <h3 class="product-name">Chiffon Hijab Set</h3>
+                <p class="product-brand">Modest Kouture</p>
+              </div>
+              <img src="assets/stars.svg" alt="Five stars" />
+            </div>
+            <p class="product-reviews">(4.1k) Customer Reviews</p>
+            <div class="product-foot">
+              <span class="product-price">$95.50</span
+              ><span class="product-stock">Almost Sold Out</span>
+            </div>
+          </article>
+          <article class="product">
+            <div class="product-image">
+              <img src="assets/product-2.webp" alt="Embroidered Kaftan" />
+            </div>
+            <div class="product-head">
+              <div>
+                <h3 class="product-name">Embroidered Kaftan</h3>
+                <p class="product-brand">Modest Kouture</p>
+              </div>
+              <img src="assets/stars.svg" alt="Five stars" />
+            </div>
+            <p class="product-reviews">(4.1k) Customer Reviews</p>
+            <div class="product-foot">
+              <span class="product-price">$95.50</span
+              ><span class="product-stock">Almost Sold Out</span>
+            </div>
+          </article>
+          <article class="product">
+            <div class="product-image">
+              <img
+                src="assets/product-4.webp"
+                alt="Knit Tunic"
+                style="object-position: 40% 30%"
+              />
+            </div>
+            <div class="product-head">
+              <div>
+                <h3 class="product-name">Knit Tunic</h3>
+                <p class="product-brand">Modest Kouture</p>
+              </div>
+              <img src="assets/stars.svg" alt="Five stars" />
+            </div>
+            <p class="product-reviews">(4.1k) Customer Reviews</p>
+            <div class="product-foot">
+              <span class="product-price">$95.50</span
+              ><span class="product-stock">Almost Sold Out</span>
+            </div>
+          </article>
+          <article class="product">
+            <div class="product-image">
+              <img
+                src="assets/product-6.webp"
+                alt="Linen Co-ord"
+                style="object-position: center 15%"
+              />
+            </div>
+            <div class="product-head">
+              <div>
+                <h3 class="product-name">Linen Co-ord</h3>
+                <p class="product-brand">Modest Kouture</p>
+              </div>
+              <img src="assets/stars.svg" alt="Five stars" />
+            </div>
+            <p class="product-reviews">(4.1k) Customer Reviews</p>
+            <div class="product-foot">
+              <span class="product-price">$95.50</span
+              ><span class="product-stock">Almost Sold Out</span>
+            </div>
+          </article>
+        </div>
+        <div class="arrivals-more">
+          <a class="btn btn-wide" href="#">View More</a>
+        </div>
+      </section>
+
+      <section class="feature" aria-label="Featured look">
+        <div class="container feature-grid">
+          <div class="feature-photo">
+            <img
+              class="feature-photo-img"
+              src="assets/slider-photo.webp"
+              alt=""
+            />
+            <img
+              class="hotspot-line"
+              src="assets/point-right.svg"
+              alt=""
+              style="left: 47%; top: 3.3%"
+            />
+            <span class="hotspot" style="left: 61.5%; top: 9.6%">Hijab</span>
+            <img
+              class="hotspot-line"
+              src="assets/point-right.svg"
+              alt=""
+              style="left: 40.4%; top: 35.1%"
+            />
+            <span class="hotspot" style="left: 55%; top: 41.4%">Abaya</span>
+            <img
+              class="hotspot-line"
+              src="assets/point-right.svg"
+              alt=""
+              style="left: 41%; top: 82.8%"
+            />
+            <span class="hotspot" style="left: 55.5%; top: 89.1%">Flats</span>
+            <img
+              class="hotspot-line flip"
+              src="assets/point-left.svg"
+              alt=""
+              style="left: 15.5%; top: 23.3%"
+            />
+            <span class="hotspot" style="left: 3.7%; top: 29.3%">Belt</span>
+            <img
+              class="hotspot-line flip"
+              src="assets/point-left.svg"
+              alt=""
+              style="left: 9.4%; top: 52.5%"
+            />
+            <span class="hotspot" style="left: 0; top: 58.4%">Clutch</span>
+          </div>
+          <div class="feature-copy">
+            <p class="feature-eyebrow">Women Collection</p>
+            <h2 class="section-title">Evening Abaya</h2>
+            <p class="feature-desc">DESCRIPTION</p>
+            <p class="feature-text">
+              A floor-length abaya in matte crepe with a soft shoulder and
+              hidden front closure. Lined through the body, cut for easy
+              movement, and finished with a matching chiffon hijab.
+            </p>
+            <div class="feature-size">
+              <span class="feature-size-label">Size:</span><span>M</span>
+            </div>
+            <p class="feature-price">$100.<small>00</small></p>
+            <a class="btn btn-wide" href="#">Buy Now</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="perks" aria-label="Why shop with us">
+        <div class="container perks-grid">
+          <div class="perk">
+            <img src="assets/feature-1.svg" alt="" />
+            <div>
+              <p class="perk-title">High Quality</p>
+              <p class="perk-text">Crafted from top materials</p>
+            </div>
+          </div>
+          <div class="perk">
+            <img src="assets/feature-2.svg" alt="" />
+            <div>
+              <p class="perk-title">Warranty Protection</p>
+              <p class="perk-text">Over 2 years</p>
+            </div>
+          </div>
+          <div class="perk">
+            <img src="assets/feature-3.svg" alt="" />
+            <div>
+              <p class="perk-title">Free Shipping</p>
+              <p class="perk-text">Orders over $150</p>
+            </div>
+          </div>
+          <div class="perk">
+            <img src="assets/feature-4.svg" alt="" />
+            <div>
+              <p class="perk-title">24 / 7 Support</p>
+              <p class="perk-text">Dedicated support</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="instagram">
+        <div class="container">
+          <h2 class="section-title">Follow Us On Instagram</h2>
+          <p class="lead">
+            Tag @modestkouture to be featured. New looks from our community
+            every day.
+          </p>
+          <div class="row insta-row">
+            <img src="assets/insta-1.webp" alt="" />
+            <img src="assets/insta-2.webp" alt="" />
+            <img src="assets/insta-3.webp" alt="" />
+            <img src="assets/insta-4.webp" alt="" />
+            <img src="assets/insta-5.webp" alt="" />
+            <img src="assets/insta-6.webp" alt="" />
+            <img src="assets/insta-7.webp" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <div class="container">
+          <h2 class="section-title">This Is What Our Customers Say</h2>
+          <p class="lead">
+            Real reviews from verified buyers across the marketplace.
+          </p>
+          <div class="row testi-row" id="testi-track">
+            <article class="testi testi-side-left">
+              <div class="testi-photo">
+                <img src="assets/testimonial-1.png" alt="" />
+              </div>
+              <div class="testi-body">
+                <p>
+                  “Items that I ordered were the best investment I ever made. I
+                  can’t say enough about your quality service.”
+                </p>
+                <img src="assets/stars.svg" alt="Five stars" />
+                <div class="testi-sep"></div>
+                <p class="testi-name">Suzan B.</p>
+                <p class="testi-role">UI Designer</p>
+              </div>
+            </article>
+            <article class="testi testi-lead">
+              <div class="testi-photo">
+                <img src="assets/testimonial-2.png" alt="" />
+              </div>
+              <div class="testi-body">
+                <p>
+                  “You won’t regret it. I would like to personally thank you for
+                  your outstanding product. Absolutely wonderful!”
+                </p>
+                <img src="assets/stars.svg" alt="Five stars" />
+                <div class="testi-sep"></div>
+                <p class="testi-name">James K.</p>
+                <p class="testi-role">Traveler</p>
+              </div>
+            </article>
+            <article class="testi testi-side-right">
+              <div class="testi-photo">
+                <img src="assets/testimonial-3.png" alt="" />
+              </div>
+              <div class="testi-body">
+                <p>
+                  “Just what I was looking for. Thank you for making it
+                  painless, pleasant and most of all hassle free! All products
+                  are great.”
+                </p>
+                <img src="assets/stars.svg" alt="Five stars" />
+                <div class="testi-sep"></div>
+                <p class="testi-name">Megan W.</p>
+                <p class="testi-role">UI Designer</p>
+              </div>
+            </article>
+          </div>
+          <div class="arrows">
+            <button
+              class="arrow arrow-prev"
+              type="button"
+              data-scroll="#testi-track"
+              data-dir="-1"
+              aria-label="Previous review"
+            >
+              <img src="assets/arrow.svg" alt="" />
+            </button>
+            <button
+              class="arrow"
+              type="button"
+              data-scroll="#testi-track"
+              data-dir="1"
+              aria-label="Next review"
+            >
+              <img src="assets/arrow.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="subscribe">
+        <div class="container subscribe-grid">
+          <div class="subscribe-sides">
+            <div class="subscribe-photo subscribe-photo-left">
+              <img src="assets/subscribe-left.webp" alt="" />
+            </div>
+            <div class="subscribe-photo subscribe-photo-right">
+              <img src="assets/subscribe-right.webp" alt="" />
+            </div>
+          </div>
+          <div class="subscribe-copy">
+            <h2 class="section-title">Subscribe To Our Newsletter</h2>
+            <p class="lead">
+              New sellers, new arrivals and the month’s deals, once a week.
+              Unsubscribe with one click.
+            </p>
+            <form class="subscribe-form" id="subscribe-form">
+              <input
+                type="email"
+                name="email"
+                placeholder="michael@ymail.com"
+                aria-label="Email"
+                autocomplete="email"
+                required
+              />
+              <button class="btn btn-wide" type="submit">Subscribe Now</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <img src="assets/logo.png" alt="Modest Kouture" />
+          <nav class="footer-links" aria-label="Footer">
+            <a href="#">Support Center</a>
+            <a href="#">Invoicing</a>
+            <a href="#">Contract</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">FAQs</a>
+          </nav>
+        </div>
+        <p class="footer-copy">© 2026 Modest Kouture. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Countdown: starts at 2 days 6 hours 5 minutes 30 seconds, like the design, and ticks down.
+      const deadline =
+        Date.now() + ((2 * 24 + 6) * 60 * 60 + 5 * 60 + 30) * 1000;
+      const boxes = Object.fromEntries(
+        [...document.querySelectorAll("#timer [data-unit]")].map((el) => [
+          el.dataset.unit,
+          el,
+        ])
+      );
+      const pad = (n) => String(n).padStart(2, "0");
+      function tick() {
+        const left = Math.max(0, Math.floor((deadline - Date.now()) / 1000));
+        boxes.days.textContent = pad(Math.floor(left / 86400));
+        boxes.hours.textContent = pad(Math.floor((left % 86400) / 3600));
+        boxes.minutes.textContent = pad(Math.floor((left % 3600) / 60));
+        boxes.seconds.textContent = pad(left % 60);
+      }
+      tick();
+      setInterval(tick, 1000);
+
+      // The header picks up a shadow once the page scrolls, like the store's.
+      const header = document.getElementById("site-header");
+      const syncShadow = () =>
+        header.classList.toggle("is-scrolled", window.scrollY > 10);
+      syncShadow();
+      window.addEventListener("scroll", syncShadow, { passive: true });
+
+      // The phone menu button opens and closes the link list under the bar.
+      const menuButton = header.querySelector(".menu-btn");
+      const phoneMenu = document.getElementById("phone-menu");
+      menuButton.addEventListener("click", () => {
+        const open = phoneMenu.hidden;
+        phoneMenu.hidden = !open;
+        menuButton.setAttribute("aria-expanded", String(open));
+        menuButton.setAttribute(
+          "aria-label",
+          open ? "Close menu" : "Open menu"
+        );
+      });
+
+      const search = header.querySelector(".site-search");
+      search.addEventListener("submit", (event) => event.preventDefault());
+
+      // Phones get the store's short placeholder; wider screens the full one.
+      const searchInput = search.querySelector("input");
+      const wide = matchMedia("(min-width: 768px)");
+      const syncPlaceholder = () => {
+        searchInput.placeholder = wide.matches
+          ? "Search for dresses, abayas, hijabs..."
+          : "Search";
+      };
+      syncPlaceholder();
+      wide.addEventListener("change", syncPlaceholder);
+
+      // Arrows scroll their row by one item.
+      for (const button of document.querySelectorAll("[data-scroll]")) {
+        button.addEventListener("click", () => {
+          const track = document.querySelector(button.dataset.scroll);
+          const step =
+            track.firstElementChild.getBoundingClientRect().width + 24;
+          track.scrollBy({
+            left: step * Number(button.dataset.dir),
+            behavior: "smooth",
+          });
+        });
+      }
+
+      document
+        .getElementById("subscribe-form")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          event.target.reset();
+        });
+    </script>
+  </body>
+</html>
